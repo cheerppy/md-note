@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>md-note v0</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <div>
+          <h1>md-note v0</h1>
+          <p class="app__subtitle">Markdown メモをローカルで管理</p>
+        </div>
+        <button class="primary" id="new-note">新規作成</button>
+      </header>
+
+      <section class="search">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="タイトル/本文を検索"
+          aria-label="メモ検索"
+        />
+      </section>
+
+      <main class="layout">
+        <aside class="sidebar">
+          <div class="sidebar__header">
+            <h2>メモ一覧</h2>
+            <span id="note-count" class="badge">0</span>
+          </div>
+          <ul id="note-list" class="note-list"></ul>
+        </aside>
+
+        <section class="content" aria-live="polite">
+          <div id="empty-state" class="empty">
+            <h2>メモがありません</h2>
+            <p>右上の「新規作成」からメモを追加してください。</p>
+          </div>
+
+          <div id="note-view" class="note-view hidden">
+            <div class="note-view__header">
+              <div>
+                <h2 id="view-title"></h2>
+                <p class="meta" id="view-updated"></p>
+              </div>
+              <button class="secondary" id="edit-note">編集</button>
+            </div>
+            <article id="view-body" class="note-body"></article>
+          </div>
+
+          <form id="note-editor" class="note-editor hidden">
+            <div class="note-editor__fields">
+              <label>
+                タイトル
+                <input type="text" id="edit-title" placeholder="タイトル" required />
+              </label>
+              <label>
+                本文 (Markdown)
+                <textarea
+                  id="edit-body"
+                  rows="14"
+                  placeholder="Markdown を入力"
+                  required
+                ></textarea>
+              </label>
+            </div>
+            <div class="note-editor__actions">
+              <button type="button" class="secondary" id="cancel-edit">キャンセル</button>
+              <button type="submit" class="primary" id="save-note">保存</button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
